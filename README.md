@@ -1,4 +1,5 @@
-# version-controlled-projects-RStudio
+# Version controlled RStudi projects
+
 A repo to deposit learning materials for "Version controlled projects in RStudio"
 
 **Description**
