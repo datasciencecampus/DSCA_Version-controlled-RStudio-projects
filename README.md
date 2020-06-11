@@ -8,7 +8,7 @@ RStudio has the ability to use version control for R projects using a very easy 
 
 **Learning Objective**  
 
-Learners will be able to use R Studios integrated Git features to improve their ability to track changes and collaborate in their code.
+Learners will be able to use R Studio's integrated Git features to improve their ability to track changes and collaborate in their code.
 
 **Lead Developer**  
 
@@ -25,9 +25,9 @@ Intermediate R users new to Git workflow.
 **Learning Objective Detail**  
 
 At the end of this course participants will be able to:
-* Variable
-* Length
-* List
+* Learn how to use the Git workflow to improve your version control & collaboration
+* Manage the Git workflow right from the R Studio IDE
+
 
 **Course Type**  
 
