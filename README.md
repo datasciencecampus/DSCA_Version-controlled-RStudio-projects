@@ -2,6 +2,10 @@
 
 ### Version 1.0
 
+**Course Duration**
+
+4 Hours
+
 **Course Summary**  
 
 RStudio has the ability to use version control for R projects using a very easy to use graphical interface. In this course we will introduce how R Studio has integrated Git version control into its interface. This allows developers to efficiently track changes in their code over time and effectively collaborate with a team of programmers. This course explains how to use the Git workflow to revise and track changes to an r markdown document, ultimately publishing your own version to web. 
