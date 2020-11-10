@@ -1,0 +1,31 @@
+Folder PATH listing for volume Data
+Volume serial number is D64A-FC3A
+D:.
+|   example_repo_structure.txt
+|   
++---course_content
+|   |   chapter2.html
+|   |   index.ipynb
+|   |   
+|   \---child_notebooks
+|           Module1.ipynb
+|           
++---data
+|       a_good_learner_dataset.csv
+|       not_iris.csv
+|       
++---exercise_solutions
+|       exercise1.py
+|       exercise1.r
+|       
++---images
+|       cool_diagram.jpg
+|       explanitory_diagram.png
+|       
+\---_preparation
+    |   feedback_from_review.docx
+    |   ppt_to_make_cool_diagram.ppt
+    |   
+    \---course_content_creation
+            chapter2.rmd
+            

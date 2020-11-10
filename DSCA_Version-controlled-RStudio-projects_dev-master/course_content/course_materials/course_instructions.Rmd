@@ -1,0 +1,344 @@
+---
+title: "Version Control in R Studio"
+author: "R Leyshon"
+date: "09/11/2020"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+R Studio offers some excellent functionality for those learning to use the **Git** workflow for the first time. You can use the R Studio interface to help access the numerous benefits that Git offers:
+
+* Free, open-source software
+* Version control
+* Online collaboration by using **remote repositories** (online folders)
+* Compatability with various online platforms like GitHub and GitLab. 
+
+*In this course we will be focussing on using Git locally on your own machine and collaborating online using GitHub. The processes discussed in this course can also be applied to GitLab or equivalents.*
+
+***
+
+# Dependencies
+
+To follow along with the course, you will need to have Git, R and R Studio installed on your machine. Furthermore, you will also need to ensure R Studio can 'talk' to Git. This can occasionally be tricky and I suggest consulting the excellent [Happy Git with R](https://happygitwithr.com/) online book by Jenny Bryan & Jim Hester. It really is an excellent resource and has some great sections on [troubleshooting](https://happygitwithr.com/connect-intro.html). 
+
+For those wishing to explore Git in a bit more detail but wishing for accessible and well-presented explanations, I would also advise the YouTube channel <a href="https://www.youtube.com/watch?v=BCQHnlnPusY&list=PLRqwX-V7Uu6ZF9C0YMKuns9sLDzK6zoiV" target="_blank">Git for Poets</a>, which as it sounds, is not directed at programmers but poets! It is their content on which the exercises in this course have been inspired.
+
+# Local Repositories
+
+
+## The Git Workflow
+
+![Git Logo](../images/git_logo.png)
+
+
+Git uses a few commands and specialist terms that can sound strange to the uninitiated. People who use Git may be heard exclaiming push, pull, fetch, commit, rebase, reset etc. These Git commands all have their own particular uses and needn't be feared. This course strives to demystify the Git terminology and focusses on the basics needed to be able to get started.
+
+It should also be noted that many Git users run their commands and interface with their remote repositories (GitHub repos for example) from the **command line**, **terminal** or **Git Bash** etc. There are many advantages to this but it is not always the simplest way to learn Git. Therefore we will be limiting the content to version control within the R studio interface only.
+
+***
+
+## Exercise 1
+
+1. **Create a new folder on a drive of your choice called** `git_repos`. We do this to keep our Git projects separate from the rest of our work and to avoid difficulties we may run into if we accidentally nest a Git project (avoid this at all costs, dealing with Git repos within Git repos can get very complex).
+
+2. **Within that folder, create another folder called** `exercise_1-2-3`. This will be our first Git repository.
+
+3. **Open R Studio. Using the menus at the top of the interface, select `File` > `New Project...` > `Existing Directory`. Navigate to the `exercise_1-2-3` folder that you created in step 2.** 
+
+4. Once R Studio has switched to the new project, **select `Tools` > `version control` > `Git`**.
+
+*Note that if Git is not an option here, you may not have Git installed on your machine. Please refer to [Happy git with R: Install Git](https://happygitwithr.com/install-git.html) for an excellent guide to troubleshooting this.*
+ 
+
+5. R Studio asks you if you would like to initiate a Git repository for your project. **Select yes**. R Studio will then **ask to restart. Allow this to happen.** Following restart, notice that now the interface has a slightly different appearance. 
+
+A git icon should appear in the menu at the top of the screen.
+![git icon in menu](../images/1.png)
+
+Furthermore, a new Git window should appear in your interface.
+![git window in R Studio](../images/2.png)
+
+We now have the foundations of a new Git version controlled R Studio project. 
+
+6. **Create an R Markdown file** in your Git repo **with the title** `Hello World`. **Specify the HTML option**.
+
+7. **Delete all unnecessary code (be careful not to delete the setup chunk), simply copy and paste the following line**:
+
+`# Hello World, my name is <your name> and I am now a Git user!`
+
+8. **Save the document and give it the filename** `hello_world.Rmd`. Notice we avoid using spaces or special characters within our folder and filenames. 
+
+9. **Knit the markdown page** and observe the resulting web page.
+
+10. Close the web page and look at your file viewer, you should see that the following files now exist: .gitignore, exercise_1-2-3.Rproj, hello_world.Rmd, hello_world.html.
+![files visible in the working directory](../images/3.png)
+
+***
+
+## Staging and committing files.
+
+<img src="../images/git_commands.jfif" width="500" alt="common git commands">
+
+In the above diagram, the commands we will be used are represented by the red arrows. At this point we are not working with a remote repo and so will not be using `git push` or `git pull` until later. 
+
+The 2 commands that are important for us to understand for the next exercise are `git add` and `git commit`. Adding files is like marking them for version tracking. When we use the add command we are placing these files and their updated states within a **staging area**. This can be thought of as adding your shopping to a conveyor belt at the supermarket.
+
+![Shopping at a checkout, image from [today.com](https://www.today.com/food/how-pick-fastest-grocery-store-checkout-line-t108490)](../images/checkout.jpg)
+
+If `git add` is like adding your shopping to the conveyor belt, `git commit` would be like paying for your shopping. You've locked in to the purchase at that point. You have committed to the transaction. If you wanted to refund any of your items you typically need to provide proof of purchase and that would be a bit like checking out to a previous commit, but we will take a look at that later.
+
+
+Revisiting our basic Git repo created in Exercise 1, we will now explore adding and committing changes. The repo was left with files saved to locally to your machine and now we would like to record the state of our simple git repository. In order to do this, we need to complete a few steps to get Git to pay attention and 'remember' our changes.
+
+## Exercise 2
+
+1. **Click on the git panel and you should see the 4 files with question marks for statuses.** Hovering on these question marks will show that they are "untracked". This means that Git is not currently paying attention to these files. 
+
+![Untracked files in the Git pane](../images/4.png)
+
+Let's wake Git up and make it pay attention!
+
+2. **Click on the boxes next to all of the files**, you should see that their icons change to a green "A" symbol, which means "Added". Git is now paying attention to these files. They have been 'staged' or added.
+
+![Staged files in the Git pane](../images/5.png)
+
+3. Next, to get Git to 'remember' a snapshot in time of all the files and their contents in the repository, we need to commit these changes. To do that, **click on the "commit" button**. A new window will appear.
+
+![R Studio commit window appears](../images/6.png)
+
+4. The important parts of this screen for now are the staged changes to the left, and the commit message box to the right. Check that all four files are staged for commit then **add a message to the box on the right**. Adding messages to your commits is **super important** for a number of reasons. It allows your future self (or any collaborators) to be able to tell what state the project was in at that point. For now, you can **write 'initial commit' in the message box. Once complete, click the commit button.** 
+
+
+If the commit executed correctly, Git should confirm that 4 files were changed. You may also have received warnings about your user name and user email. This is not important for this exercise but is essential for when we move onto Github later.
+![Git commit message](../images/7.png)
+
+
+## Commit Messages
+
+Commit messages are very flexible and an organisation may include conventions to standardise them. If you work at such an organisation, then it is important to adhere to the in-house guidance. However, various threads can be found online debating best practice in regards to commit messages. An great but extensive template written by [Tim Pope](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) is included below:
+
+```
+Capitalized, short (50 chars or less) summary
+
+More detailed explanatory text, if necessary.  Wrap it to about 72
+characters or so.  In some contexts, the first line is treated as the
+subject of an email and the rest of the text as the body.  The blank
+line separating the summary from the body is critical (unless you omit
+the body entirely); tools like rebase can get confused if you run the
+two together.
+
+Write your commit message in the imperative: "Fix bug" and not "Fixed bug"
+or "Fixes bug."  This convention matches up with commit messages generated
+by commands like git merge and git revert.
+
+Further paragraphs come after blank lines.
+
+- Bullet points are okay, too
+
+- Typically a hyphen or asterisk is used for the bullet, followed by a
+  single space, with blank lines in between, but conventions vary here
+
+- Use a hanging indent
+
+If you use an issue tracker, add a reference(s) to them at the bottom,
+like so:
+
+Resolves: #123
+
+
+```
+
+I would also point newcomers to Git to the following [Freecodecamp article](https://www.freecodecamp.org/news/writing-good-commit-messages-a-practical-guide/) which takes about 5 minutes to read and indicates some important features to include in a commit message.
+
+Revisiting our simple Git repo used in exercises 1 and 2, we can now use this to explore updating our commits. 
+
+## Exercise 3
+
+1. Let's add another line to our `hello_world.Rmd`. On the next free line, **copy and paste:
+My favourite food is \<insert food here\> and I enjoy \<your favourite hobby here\> in my spare time.**   
+
+
+2. After making the change above, **save the file**. You should now see this changed file appear within your Git pane. A change has been detected but the file is currently untracked. 
+
+
+3. Let's also **create a readme** for our git repo. No repo is complete without a readme. **Create a text file from R Studio - File > New File > text File**. Paste the following content into the text file:
+
+```
+# Readme
+
+A repo containing information about me.
+```
+
+4. **Save the file as** `README.md`. Notice it appears in your Git pane. See also that it has a different status to the hello_world.Rmd. As it has not yet been committed, Git is currently not tracking changes within this file.
+
+5. **Repeat the process of adding then committing all the changed files with a message of your choice.** 
+
+6. Once the window confirms that changes have been made, **navigate to the `History` section of your window** and notice that 2 commits are now present.
+
+![2 commits visible in the commit window](../images/8.png)
+
+Click between the 2 commits, you will then be able to view the contents of them by scrolling down to the bottom of the screen. 
+
+***
+
+## Working with remote repositories
+
+![GitHub Logo](../images/github-mark.png)
+
+Now we will consider working with online remote repositories. In order to do this, you will need a [GitHub](https://github.com/) profile set up. To communicate with your remote repo, you will also need to authenticate. We suggest using the **HTTPS** method of authentication as it is the most straight forward method. For assistance in setting up and troubleshooting GitHub configuration, please consult the [GitHub help documentation](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/set-up-git#next-steps-authenticating-with-github-from-git). 
+
+**At this point, I suggest the instructor takes the delegates on a tour of GitHub.**
+
+
+## Config
+
+It is important to set your Git configuration options so that they match the credentials of your GitHub profile. In order to proceed, you will need to ensure your global configurations for user name and Email match your GitHub profile.
+
+To do this:
+
+1. Open the command line.
+2. Set your username: `git config --global user.name "FIRST_NAME LAST_NAME"`
+3. Set your email address: `git config --global user.email "MY_NAME@example.com"`
+4. Check that the values have been updated: `git config --global`. This should show that the credentials have been updated.
+
+***
+
+# Online Collaboration
+
+Now that your GitHub account is correctly linked to RStudio, you will be able to push and pull from any remote repositories you have been granted access to. Let's consider remotes by consulting the diagram from earlier.
+
+<img src="../images/git_commands.jfif" width="500" alt="common git commands">
+
+You can see from the diagram that the two main commands required for interacting with remotes are `git pull` and `git push`. **It is very important to get into the habit of always pulling before pushing.** I cannot stress this enough how important it is to do this. It is very easy to run into issues where perhaps someone else has updated the remote repo and then unknowingly, your local work has fallen behind the master branch of the remote repo. This can cause issues, so it really is good practice to always pull any changes to the remote prior to pushing.
+
+
+***
+
+
+## Exercise 4
+
+In this exercise we will clone the contents of a remote repository to our machine.
+
+1. Create a new folder in your `git_projects` folder called `exercise_4-5`.
+
+2. Open R studio / Start a new session.
+
+3. **Select File > new project > Version Control > Git** in the menu.
+
+4. **Visit the [local repo](https://github.com/r-leyshon/intro_git_r). Find the correct url for HTTPS cloning. Click the copy button to copy to clipboard.**
+
+![HTTPS clone url on GitHub](../images/9.png)
+
+5. Paste the repo url into the specified area then select the `exercise_4` folder you created in step 1. Git should now clone the contens of the remote repo into your specified repository.
+
+Note that in this way, the cloned repo is already a git repo and you inherit all the commit history and branches from the remote repo.
+
+
+## Git Branching
+
+Branching in Git is a feature that allows you to create a new, alternate version of the repo. A bit like an alternate universe in which you are free to experiment, try things out and ultimately **merge** back to the master branch if you wanted to keep your changes. In this way, many programmers can simultaneously be working on their own branches without interfering with one-another's work.
+
+![Node diagram showing giit project with branches and merging](../images/git-branches-merge.png)
+
+## Exercise 5
+
+1. We will begin by creating a new branch to store our edits. In the corner of the R Studio Git pane, you will see the git branch icon. **Select it to bring up the branch dialogue box**.
+
+![Branch button in R Studio](../images/10.png)
+
+
+2. **Input the name for your branch**, I suggest calling it `your_initials_branch` as in the figure below. Ensure the 'sync remote' checkbox is ticked. This will keep the GitHub repo up to date with our local repo. **Click create**.
+
+![](../images/11.png)
+
+
+3. Now that you have created the branch, you need to ensure you have checked that branch out. This is like switching between branches. To do this, **click on the button next to the branch icon in the R Studio Git pane**.
+
+![Branch button in R Studio](../images/10.png)
+
+
+4. Now that we have checked out an alternative branch to the master branch, we can make our changes while preserving the state of the original work. There is a nice banner image in the `images` folder of the repo that you cloned in exercise 4. **To add it to the top of the readme, insert the following line**:
+
+```
+![](images/ds_banner.jpeg)
+```
+
+5. **Update the title of the readme** header of the poem to something a bit nicer. Finally, ensure you **save your changes**. 
+
+
+6. we are now ready to push our new branch to the remote repo. But before we do so, it is a good idea to **pull** before pushing. To do that, **select the blue down arrow at the top of the Git pane**. 
+
+![](../images/12.png)
+
+
+7. Once the console has finished, you will be ready to push. To do this, select the green up arrow at the top of the Git pane. 
+
+![](../images/14.png)
+
+
+Observe the output of the push message:
+![](../images/13.png)
+
+8. Notice the console tells you now to create a pull request on GitHub. Let's do that. You may either **copy and paste the link to take you straight to the pull request, or you may navigate to the remote url and follow the below prompts below**.
+
+## Navigation to pull requests
+
+At the remote url:
+
+![](../images/15.png)
+
+Select pull request below the green code button.
+
+![](../images/16.png)
+
+
+GitHub will prompt you to include a message for the owner of the repo / person tasked with reviewing pull requests.
+
+![](../images/17.png)
+
+You may include labels and assign people to the request at the right of the screen.
+
+![](../images/18.png)
+
+If a conflitc exists, GitHub warns you they need resolving. click on resolve conflicts to do this on Github.
+
+![](../images/19.png)
+
+A text editor opens where branch conflicts are shown. You will need to choose from conflicting lines in order to proceed with the pull request.
+
+![](../images/20.png)
+
+Below, the conflict has been resolved. 
+
+![](../images/21.png)
+
+To the right of the screen, I can mark conflicts as resolved and the proceed with a merge. This will merge the new branch back to the master branch. The changes will then be incorporated back to the main body of work.
+
+![](../images/22.png)
+
+Here you can see that GitHub now shows that no conflicts exist and a merge can proceed with no issue.
+
+![](../images/23.png)
+
+Once merged, you will be prompted to delete the merged branch. This is optional.
+
+![](../images/24.png)
+
+
+
+
+# Next Steps
+
+After this course it would be advisable to begin using Git in your RAP assignment. We would encourage you to share the code on GitHub providing the data is open and non-sensitive. 
+
+**The best way to learn Git is to commit!**
+
